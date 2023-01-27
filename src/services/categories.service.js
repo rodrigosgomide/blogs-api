@@ -18,12 +18,10 @@ const registerCategory = async (newCategory) => {
 //   return user;
 // };
 
-// const getAllUsers = async () => {
-//   const users = await User.findAll({
-//     attributes: { exclude: ['password'] },
-//   });
-//   return users;
-// };
+const getAllCategories = async () => {
+  const categories = await Category.findAll();
+  return categories;
+};
 
 // const getUserById = async (id) => {
 //   const user = await User.findByPk(id, {
@@ -35,4 +33,5 @@ const registerCategory = async (newCategory) => {
 
 module.exports = {
   registerCategory,
+  getAllCategories,
 };

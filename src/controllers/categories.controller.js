@@ -10,14 +10,14 @@ const registerCategory = async (req, res, next) => {
     }
 };
 
-// const getAllUsers = async (req, res, next) => {
-//     try {
-//         const users = await userService.getAllUsers();
-//         return res.status(200).json(users);
-//     } catch (error) {
-//         next(error);
-//     }
-// };
+const getAllCategories = async (req, res, next) => {
+    try {
+        const categories = await categoryService.getAllCategories();
+        return res.status(200).json(categories);
+    } catch (error) {
+        next(error);
+    }
+};
 
 // const getUserById = async (req, res, next) => {
 //     const { id } = req.params;
@@ -31,4 +31,5 @@ const registerCategory = async (req, res, next) => {
 
 module.exports = {
     registerCategory,
+    getAllCategories,
 };
