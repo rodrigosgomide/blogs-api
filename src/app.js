@@ -1,6 +1,5 @@
 const express = require('express');
-const { loginRoute } = require('./routes');
-const { userRoute } = require('./routes');
+const { loginRoute, userRoute, cetegoryRoute } = require('./routes');
 
 //  ...
 
@@ -10,6 +9,7 @@ app.use(express.json());
 
 app.use('/login', loginRoute);
 app.use('/user', userRoute);
+app.use('/categories', cetegoryRoute);
 
 app.use((error, _req, res, _next) => {
     if (error.status) {
