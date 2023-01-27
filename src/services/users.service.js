@@ -22,6 +22,20 @@ const registerUser = async (newUserInfo) => {
   }
 };
 
+const getUserByEmail = async (email) => {
+  const user = await User.findOne({ where: { email } });
+  return user;
+};
+
+const getAllUsers = async () => {
+  const users = await User.findAll({
+    attributes: { exclude: ['password'] },
+  });
+  return users;
+};
+
 module.exports = {
   registerUser,
+  getUserByEmail,
+  getAllUsers,
 };

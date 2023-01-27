@@ -15,7 +15,7 @@ app.use((error, _req, res, _next) => {
     if (error.status) {
       return res.status(error.status).json({ message: error.message });
     }
-    console.error(`***** Erro ${error.errors[0].message}`);
+    console.error(`***** Erro ${error.message}`);
     return res.status(500).json({ message: 'internal server error' });
   });
 
