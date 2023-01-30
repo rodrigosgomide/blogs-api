@@ -2,12 +2,12 @@ const { errorStatus } = require('./errors');
 
 const errorHandler = (message, status) => ({ message, status });
 
-const validateByScheema = (scheema, value) => {
+const validateByScheema = (scheema, value, message, status) => {
   const { error } = scheema.validate(value);
+  console.log(error);
   if (error) {
-    const { type } = error.details[0];
-    if (type === 'any.required') {
-      throw errorHandler(error.message, errorStatus.IS_REQUIRED);
+    if (message && status) {
+      throw errorHandler(message, status);
     }
     throw errorHandler(error.message, errorStatus.INVALID_FIELDS);
   }

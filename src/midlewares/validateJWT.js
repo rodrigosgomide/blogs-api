@@ -21,9 +21,8 @@ module.exports = async (req, res, next) => {
     if (!user) {
       return res.status(401).json({ message: 'User does not exist' });
     }
-
+    
     req.user = user;
-
     next();
   } catch (err) {
     return res.status(401).json({ message: 'Expired or invalid token' });

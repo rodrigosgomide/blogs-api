@@ -20,15 +20,13 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: true,
         },
         published: {
-          allowNull: false,
           type: DataTypes.DATE
         },
         updated: {
-          allowNull: false,
           type: DataTypes.DATE
         }
       },
-      { underscored:true, tableName: 'blog_posts' }
+      { createdAt: "published",updatedAt: "updated", underscored:true, tableName: 'blog_posts' }
     );
 
     BlogPost.associate = (models) => {

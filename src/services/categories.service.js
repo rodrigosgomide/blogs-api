@@ -1,7 +1,7 @@
 const { Category } = require('../models');
 const { validateByScheema } = require('./Utils/validations');
 const { categoryScheema } = require('./Utils/schemas');
-// const { customError, errorStatus, errorMessages } = require('./Utils/errors');
+const { customError, errorStatus, errorMessages } = require('./Utils/errors');
 
 const registerCategory = async (newCategory) => {
     validateByScheema(categoryScheema, newCategory);
@@ -23,15 +23,14 @@ const getAllCategories = async () => {
   return categories;
 };
 
-// const getUserById = async (id) => {
-//   const user = await User.findByPk(id, {
-//     attributes: { exclude: ['password'] },
-//   });
-//   if (!user) throw customError(errorStatus.NOT_FOUND, errorMessages.USER_NOT_EXIST);
-//   return user;
-// };
+const getCategoryById = async (id) => {
+  const category = await Category.findByPk(id);
+  if (!category) throw customError(errorStatus.INVALID_FIELDS, errorMessages.INVALID_CATEGORY);
+  return category;
+};
 
 module.exports = {
   registerCategory,
   getAllCategories,
+  getCategoryById,
 };

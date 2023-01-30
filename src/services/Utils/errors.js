@@ -8,6 +8,7 @@ const errorStatus = {
     IS_REQUIRED: 'Some required fields are missing',
     INVALID_FIELDS: 'Invalid fields',
     USER_NOT_EXIST: 'User does not exist',
+    INVALID_CATEGORY: 'one or more "categoryIds" not found',
   };
 
   const customError = (status, message) => ({ status, message });
