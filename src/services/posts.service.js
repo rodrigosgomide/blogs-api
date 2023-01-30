@@ -1,7 +1,7 @@
 const { BlogPost, User, Category } = require('../models');
 const { validateByScheema } = require('./Utils/validations');
 const { postScheema } = require('./Utils/schemas');
-const { errorStatus, errorMessages } = require('./Utils/errors');
+const { errorStatus, errorMessages, customError } = require('./Utils/errors');
 
 const registerPost = async (newPost) => {
     validateByScheema(
@@ -33,15 +33,25 @@ const getAllPosts = async () => {
   return posts;
 };
 
-// const getUserById = async (id) => {
-//   const user = await User.findByPk(id, {
-//     attributes: { exclude: ['password'] },
-//   });
-//   if (!user) throw customError(errorStatus.NOT_FOUND, errorMessages.USER_NOT_EXIST);
-//   return user;
-// };
+const getPostById = async (id) => {
+  const post = await BlogPost.findByPk(id, { include: [
+    { model: User,
+      as: 'user',
+    required: true,
+    attributes: { exclude: ['password'] } },
+    { model: Category,
+      as: 'categories',
+      through: {
+        attributes: [],
+      },
+      required: true },
+  ] });
+  if (!post) throw customError(errorStatus.NOT_FOUND, errorMessages.POST_NOT_EXIST);
+  return post;
+};
 
 module.exports = {
   registerPost,
   getAllPosts,
+  getPostById,
 };

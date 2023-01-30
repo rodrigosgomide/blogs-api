@@ -9,6 +9,7 @@ const errorStatus = {
     INVALID_FIELDS: 'Invalid fields',
     USER_NOT_EXIST: 'User does not exist',
     INVALID_CATEGORY: 'one or more "categoryIds" not found',
+    POST_NOT_EXIST: 'Post does not exist',
   };
 
   const customError = (status, message) => ({ status, message });
