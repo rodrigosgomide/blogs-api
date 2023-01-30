@@ -14,14 +14,14 @@ const registerPost = async (req, res, next) => {
     }
 };
 
-// const getAllUsers = async (req, res, next) => {
-//     try {
-//         const users = await postService.getAllUsers();
-//         return res.status(200).json(users);
-//     } catch (error) {
-//         next(error);
-//     }
-// };
+const getAllPosts = async (req, res, next) => {
+    try {
+        const posts = await postService.getAllPosts();
+        return res.status(200).json(posts);
+    } catch (error) {
+        next(error);
+    }
+};
 
 // const getUserById = async (req, res, next) => {
 //     const { id } = req.params;
@@ -35,4 +35,5 @@ const registerPost = async (req, res, next) => {
 
 module.exports = {
     registerPost,
+    getAllPosts,
 };

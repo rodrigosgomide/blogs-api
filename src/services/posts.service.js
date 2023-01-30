@@ -1,4 +1,4 @@
-const { BlogPost } = require('../models');
+const { BlogPost, User, Category } = require('../models');
 const { validateByScheema } = require('./Utils/validations');
 const { postScheema } = require('./Utils/schemas');
 const { errorStatus, errorMessages } = require('./Utils/errors');
@@ -17,10 +17,21 @@ const registerPost = async (newPost) => {
     return post;
 };
 
-// const getUserByEmail = async (email) => {
-//   const user = await User.findOne({ where: { email } });
-//   return user;
-// };
+const getAllPosts = async () => {
+  const posts = await BlogPost.findAll({ include: [
+    { model: User,
+      as: 'user',
+    required: true,
+    attributes: { exclude: ['password'] } },
+    { model: Category,
+      as: 'categories',
+      through: {
+        attributes: [],
+      },
+      required: true },
+  ] });
+  return posts;
+};
 
 // const getUserById = async (id) => {
 //   const user = await User.findByPk(id, {
@@ -32,4 +43,5 @@ const registerPost = async (newPost) => {
 
 module.exports = {
   registerPost,
+  getAllPosts,
 };
