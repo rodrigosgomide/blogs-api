@@ -23,6 +23,7 @@ module.exports = async (req, res, next) => {
     }
     
     req.user = user;
+
     next();
   } catch (err) {
     return res.status(401).json({ message: 'Expired or invalid token' });

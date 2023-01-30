@@ -50,8 +50,21 @@ const getPostById = async (id) => {
   return post;
 };
 
+const updatePost = async (payload) => {
+  const { id, title, content, userId } = payload;
+  validateByScheema(
+    postScheema, { title, content, id }, errorMessages.IS_REQUIRED, errorStatus.IS_REQUIRED,
+    );
+    
+  const [post] = await BlogPost.update({ title, content }, { where: { id, userId } });
+
+  if (post === 0) throw customError(errorStatus.UNAUTHORIZED, errorMessages.UNAUTHORIZED_USER);
+  return getPostById(id);
+};
+
 module.exports = {
   registerPost,
   getAllPosts,
   getPostById,
+  updatePost,
 };
